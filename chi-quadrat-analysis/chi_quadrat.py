@@ -104,10 +104,20 @@ def calculate_chi_quadrat(amino_one, amino_two, cor=0):
 
     first_difference = abs(amino_one - amino_two)
     second_difference = abs(delta_amino_one - delta_amino_two)
+    try:
+      answer = first_difference*first_difference/amino_two + second_difference*second_difference/delta_amino_two
+      return round(answer, ROUND_AFTER_POINT)
+    except:
+      global CURRENT_LETTER_DEBUGGER
+  
+      print(f"\n\nError occured during the operation: Divide by zero!")
+      print(f"Current Amino Acid: {CURRENT_LETTER_DEBUGGER}")
+      print(f"Amino one: {amino_one}")
+      print(f"Amino two: {amino_two}")
+      print(f"Delta one: {delta_amino_one}")
+      print(f"Delta amino two: {delta_amino_two}\n\n")
 
-    answer = first_difference*first_difference/amino_two + second_difference*second_difference/delta_amino_two
-
-    return round(answer, ROUND_AFTER_POINT)
+      return 0
 
 
 def save_result(result):
